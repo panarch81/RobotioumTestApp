@@ -3,12 +3,16 @@ package robotium.nisum.com.robotiumapp;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.InstrumentationRegistry;
+import android.widget.Button;
+import android.widget.TextView;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.robotium.solo.Solo;
+
+import static junit.framework.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class Example2Test {
@@ -26,10 +30,15 @@ public class Example2Test {
 
     @Test(timeout = 5000)
     public void checkIfMainActivityIsProperlyDisplayed() throws Exception {
-        solo.waitForActivity("MainActivity", 2000);
-        solo.assertCurrentActivity(mActivityRule.getActivity().getString(
-                R.string.error_no_class_def_found, MAIN_ACTIVITY), MAIN_ACTIVITY);
-        solo.getText("Hello World").isShown();
+
+        solo.unlockScreen();
+        Button btn_test = (Button) solo.getView(R.id.btn_saludo);
+        solo.waitForText("Hello!");
+        solo.clickOnView(btn_test);
+        solo.waitForText("Thanks!");
+        TextView texto_test = (TextView) solo.getView(R.id.textoEj);
+        String currentMsje =  texto_test.getText().toString();
+        assertEquals(currentMsje,"Thanks!");
 
     }
 }
