@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RobotiumApp</string>
+    <string name="error_no_class_def_found">Error: Could not find or load %s</string>
+</resources>
